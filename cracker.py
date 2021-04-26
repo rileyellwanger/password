@@ -51,7 +51,7 @@ pwds.close()
 if(crackedPwd) :
     time = outputResult(startTime)
     f = open("./results.txt", "a")
-    f.write("Character set: %s // Pwd Length: %d // Pwd: %s // Time: %d: %d: %.2f \n" 
+    f.write("Character set: %s \t Pwd Length: %d \t Pwd: %s \t Time: %d: %d: %.2f \n" 
             %(pwdType, length, inputPwd, time[0], time[1], time[2]))
     f.close()
     sys.exit()
