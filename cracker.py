@@ -18,7 +18,7 @@ def outputResult(start):
     seconds = elapsedTime - 60 * minutes 
 
     print("Elapsed time: %d hours, %d minutes, %.2f seconds"  %(hours, minutes, seconds))
-    sys.exit()
+    return [hours, minutes, seconds]
 
 def checkPermutations(password, permutations):
     result = 0
@@ -49,7 +49,12 @@ pwds.close()
 
 # If password found, calculate and display the amount of time it took
 if(crackedPwd) :
-    outputResult(startTime)
+    time = outputResult(startTime)
+    f = open("./results.txt", "a")
+    f.write("Character set: %s // Pwd Length: %d // Pwd: %s // Time: %d: %d: %.2f \n" 
+            %(pwdType, length, inputPwd, time[0], time[1], time[2]))
+    f.close()
+    sys.exit()
 else:
     print("Password not on list. Initializing brute force . . . ")
 
@@ -73,4 +78,11 @@ if(pwdType == '4'):
     crackedPwd = checkPermutations(inputPwd, permutations)
 
 if(crackedPwd):
-    outputResult(startTime)
+    time = outputResult(startTime)
+    f = open("./results.txt", "a")
+    f.write("Character set: %s \t Pwd Length: %d \t Pwd: %s \t Time: %d: %d: %.2f \n" 
+            %(pwdType, length, crackedPwd, time[0], time[1], time[2]))
+    f.close()
+else:
+    print("Password not found.")
+    sys.exit()
